@@ -57,7 +57,7 @@
       }
     };
 
-    /* ваш код */
+    /* ваш код влоп*/
     
     function createTree(elem, data) {
       
@@ -69,7 +69,7 @@
         li.textContent = key;
         elem.children[0].appendChild(li);
         
-        if (Object.keys(data[key]).length != 0) createTree(li, data[key]);
+        if (Object.keys(data[key]).length != 0) createTree(li, data[key]); 
         
       }
       
