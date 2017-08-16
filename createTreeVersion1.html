@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <div id="tree"></div>
+
+  <!-- Результат должен быть таким:
+<div id="tree">
+<ul>
+  <li>Рыбы
+    <ul>
+      <li>Форель</li>
+      <li>Щука</li>
+    </ul>
+  </li>
+  <li>Деревья
+    <ul>
+      <li>Хвойные
+        <ul>
+          <li>Лиственница</li>
+          <li>Ель</li>
+        </ul>
+      </li>
+      <li>Цветковые
+        <ul>
+          <li>Берёза</li>
+          <li>Тополь</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+</div>
+-->
+
+  <script>
+    var data = {
+      "Рыбы": {
+        "Форель": {},
+        "Щука": {}
+      },
+
+      "Деревья": {
+        "Хвойные": {
+          "Лиственница": {},
+          "Ель": {}
+        },
+        "Цветковые": {
+          "Берёза": {},
+          "Тополь": {}
+        }
+      }
+    };
+
+    /* ваш код */
+    function createTree(elem, data) {
+      
+      elem.appendChild(document.createElement('ul'));
+     
+      for (var key in data) {
+        
+        var li =  document.createElement('li');
+        li.textContent = key;
+        elem.children[0].appendChild(li);
+        
+        if (Object.keys(data[key]).length != 0) createTree(li, data[key]);
+        
+      }
+      
+    }
+
+    createTree(document.getElementById('tree'), data);
+  </script>
+
+</body>
+
+</html>

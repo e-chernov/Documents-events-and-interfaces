@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    
+  </head>
+
+  <body>
+    <h1>Создание списка</h1>
+    <ul></ul>
+    <script>
+      while (true) {
+        var liData = prompt('Введите пункт списка', '');
+        if (liData == null || liData == '') break;
+        var li = document.createElement('li');
+        li.textContent = liData;
+        document.body.children[1].appendChild(li);
+      }
+    </script>
+  </body>
+
+</html>
