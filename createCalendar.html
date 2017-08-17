@@ -1,0 +1,31 @@
+    function createCalendar(id, year, month) {
+      var elem = document.getElementById(id);
+      var date = new Date(year, month, 1);
+      var day = date.getDay;
+      var days = ['пн', 'вт', 'ср', 'чт', 'пт', 'сб', 'вс'];
+
+      // ... ваш код, который генерирует в elem календарь
+      
+      var table = document.createElement('table');
+      calendar.appendChild(table);
+      for (var i = 1; i <= 7; i++) {
+        table.appendChild(document.createElement('tr'));
+      }
+
+      var trs = table.querySelectorAll('tr');
+      for (i = 0; i < trs.length; i++) {
+        
+        for (var j = 0; j <= 6; j++) {
+           if (i == 0) {
+             var th = document.createElement('th');
+             th.textContent = days[j];
+             trs[i].appendChild(th);
+           }
+           else trs[i].appendChild(document.createElement('td'));
+          
+        }
+          
+      }
+      
+      
+    }
