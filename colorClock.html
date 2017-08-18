@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+<style>
+  .hours {
+    color: red;
+  }
+  .minutes {
+    color: green;
+  }
+  .seconds {
+    color: blue;
+  }
+</style>
+
+<body>
+
+
+  <input type="button" onclick="clockStart()" value="Start">
+
+  <input type="button" onclick="clockStop()" value="Stop">
+  
+  <div hidden>
+      <span class="hours">kjh</span><span class="minutes">hgkjg</span><span class="seconds">jhgkg</span>
+  </div>
+  
+  <script>
+    
+    var div = document.body.children[2];
+    var timerID;
+    
+    function addNull (number) {
+      if (number < 10) return '0' + number;
+      return number;
+    }
+    
+    function clockStart() {
+      
+      var date = new Date,
+          hours = date.getHours(),
+          minutes = date.getMinutes(),
+          seconds = date.getSeconds();
+          
+      div.children[0].innerHTML = addNull(hours); 
+      div.children[1].innerHTML = ':' + addNull(minutes);
+      div.children[2].innerHTML = ':' + addNull(seconds);
+      div.hidden = false;
+          
+     timerID = setInterval(function() {
+        seconds += 1;
+        if (seconds == 60) {
+          seconds = 0;
+          minutes += 1;
+        }
+        if (minutes == 60) {
+          minutes = 0;
+          hours +=1;
+        }
+        if (hours == 24) hours = 0;
+        div.children[0].innerHTML = addNull(hours); 
+        div.children[1].innerHTML = ':' + addNull(minutes);
+        div.children[2].innerHTML = ':' + addNull(seconds);
+      }, 1000);
+      
+    }
+    
+    function clockStop() {
+      clearInterval(timerID);
+      div.hidden = true;
+    }
+  </script>
+</body>
+
+</html>
