@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+    <table>
+      <tr>
+        <th>
+          Имя
+        </th>
+        <th>
+          Фамилия
+        </th>
+        <th>
+          Отчество
+        </th>
+        <th>
+          Возраст
+        </th>
+      </tr>
+      <tr>
+        <td>
+          Вася
+        </td>
+        <td>
+          Петров
+        </td>
+        <td>
+          Александрович
+        </td>
+        <td>
+          10
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Петя
+        </td>
+        <td>
+          Иванов
+        </td>
+        <td>
+          Петрович
+        </td>
+        <td>
+          15
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Владимир
+        </td>
+        <td>
+          Ленин
+        </td>
+        <td>
+          Ильич
+        </td>
+        <td>
+          9
+        </td>
+      </tr>
+    </table>
+    
+  <script>
+    var trs = document.body.querySelectorAll('tr');
+    var rowObjects = [];
+    var table = document.body.children[0];
+    for (var i = 0; i < trs.length - 1; i++) {
+     
+     rowObjects[i] = {
+        name: trs[i + 1].children[0].innerHTML,
+        surname: trs[i + 1].children[1].innerHTML,
+        familyname: trs[i + 1].children[2].innerHTML,
+        age: trs[i + 1].children[3].innerHTML
+      };
+       
+    }
+
+        
+    function compareByAge(obj1, obj2) {
+      return obj1.age - obj2.age;
+    }
+    
+    rowObjects.sort(compareByAge);
+
+    for (i = 0; i < rowObjects.length; i++) {
+      table.rows[i+1].innerHTML = '<td>' +
+        rowObjects[i].name + '</td><td>' + rowObjects[i].surname +
+        '</td><td>' + rowObjects[i].familyname + '</td><td>' +
+        rowObjects[i].age + '</td>';
+    } 
+    
+  </script>
+  
+  </body>
+  
+
+
+</html>
