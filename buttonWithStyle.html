@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+
+  <body>
+<!--    <style>
+     .button {
+       -moz-border-radius: 8px;
+       -webkit-border-radius: 8px;
+       border-radius: 8px;
+       border: 2px groove green;
+       display: block;
+       height: 30px;
+       line-height: 30px;
+       width: 100px;
+       text-decoration: none;
+       text-align: center;
+       color: red;
+       font-weight: bold;
+     }
+   </style>
+
+   <a class="button" href="/">Нажми меня</a> -->
+   
+      <script>
+        var a = document.createElement('a');
+        a.innerHTML = 'Нажми меня';
+        a.setAttribute('href', '/');
+        a.style.borderWidth = '2px';
+        a.style.borderStyle = 'groove';
+        a.style.borderColor = 'green';
+        a.style.borderRadius = '8px';
+        a.style.MozBorderRadius = '8px';
+        a.style.WebkitBorderRadius = '8px';
+        a.style.display = 'block';
+        a.style.height = '30px';
+        a.style.lineHeight = '30px';
+        a.style.width = '100px';
+        a.style.textDecoration = 'none';
+        a.style.textAlign = 'center';
+        a.style.color = 'red';
+        a.style.fontWeight = 'bold';
+        document.body.appendChild(a);
+      </script>
+   </body>
+
+</html>
