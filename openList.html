@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+
+
+<head>
+  <meta charset="utf-8">
+  <style>
+  li {
+    display: none;
+    list-style-type: none;
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
+</style>
+</head>
+
+<body>
+
+  <a href = "#">▶ Сладости (нажми меня)!</a>
+  <ul>
+    <li>Торт</li>
+    <li>Пончик</li>
+    <li>Пирожное</li>
+  </ul>
+
+
+</body>
+<script>
+  var node = document.body.firstElementChild;
+  node.onclick = function() {
+    node.innerHTML = '▼  Сладости (нажми меня)!';
+    var lis = document.body.querySelectorAll('li');
+    for (var i = 0; i < lis.length; i++) {
+      lis[i].style.display = 'list-item';
+    }
+  }
+</script>
+
+</html>
