@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    th {
+      cursor: pointer;
+    }
+
+    th:hover {
+      background: yellow;
+    }
+  </style>
+</head>
+
+<body>
+
+  <table id="grid">
+    <thead>
+      <tr>
+        <th data-type="number">Возраст</th>
+        <th data-type="string">Имя</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>5</td>
+        <td>Вася</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Петя</td>
+      </tr>
+      <tr>
+        <td>12</td>
+        <td>Женя</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Маша</td>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Илья</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    /* ваш код */
+
+    grid.onclick = function(event) {
+      
+      if (event.target.tagName != 'TH') return;
+
+      var table = document.body.firstElementChild;
+
+      var dataArr = [];
+      
+      
+        for (var i = 0; i < table.tBodies[0].rows.length; i++) {
+          dataArr[i] = table.tBodies[0].rows[i].cells[event.target.cellIndex].innerHTML;
+        }
+        
+        if (event.target.getAttribute('data-type') == 'number') 
+          dataArr.sort(function(a,b) {return a - b});
+        else dataArr.sort();
+        for (i = 0; i < dataArr.length; i++) {
+          table.tBodies[0].rows[i].cells[event.target.cellIndex].innerHTML = dataArr[i];
+        }
+    }
+  </script>
+
+</body>
+
+</html>
