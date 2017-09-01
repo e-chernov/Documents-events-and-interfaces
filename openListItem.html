@@ -12,7 +12,8 @@
     a:hover {
       font-weight: bold;
     }
-  </style>
+    
+   </style>
 </head>
 
 <body>
@@ -47,7 +48,7 @@
 
         </li>
         <li><a href="#">Морские</a>
-          <ul>
+          <ul class="exp">
             <li><a href="#">Морская форель</a></li>
           </ul>
         </li>
@@ -59,8 +60,9 @@
     var ul = document.body.firstElementChild;
     ul.onclick = function(event) {
       if (event.target.tagName != 'A') return;
-      if (event.target.nextSibling.hidden == true) event.target.nextSibling.hidden = false;
-      else event.target.nextSibling.hidden = true;
+      if (event.target.nextElementSibling.style.display == 'none') 
+        event.target.nextElementSibling.style.display = 'block';
+      else event.target.nextElementSibling.style.display = 'none';
     }
   </script>
 
