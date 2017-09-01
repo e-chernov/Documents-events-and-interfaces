@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    a {
+      text-decoration: none;
+      color: black;
+    }
+    
+    a:hover {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <ul class="tree">
+    <li><a href="#">Животные</a>
+      <ul>
+        <li><a href="#">Млекопитающие</a>
+          <ul>
+            <li><a href="#">Коровы</a></li>
+            <li><a href="#">Ослы</a></li>
+            <li><a href="#">Собаки</a></li>
+            <li><a href="#">Тигры</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Другие</a>
+          <ul>
+            <li><a href="#">Змеи</a></li>
+            <li><a href="#">Птицы</a></li>
+            <li><a href="#">Ящерицы</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#">Рыбы</a>
+      <ul>
+        <li><a href="#">Аквариумные</a>
+          <ul>
+            <li><a href="#">Гуппи</a></li>
+            <li><a href="#">Скалярии</a></li>
+          </ul>
+
+        </li>
+        <li><a href="#">Морские</a>
+          <ul>
+            <li><a href="#">Морская форель</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  
+  <script>
+    var ul = document.body.firstElementChild;
+    ul.onclick = function(event) {
+      if (event.target.tagName != 'A') return;
+      if (event.target.nextSibling.hidden == true) event.target.nextSibling.hidden = false;
+      else event.target.nextSibling.hidden = true;
+    }
+  </script>
+
+</body>
+
+</html>
