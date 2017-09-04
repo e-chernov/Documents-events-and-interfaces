@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      height: 2000px;
+      /* подсказка должна работать независимо от прокрутки */
+    }
+    /* ваши стили */
+    .tooltip {
+      position: absolute;
+      padding: 10px;
+      border: 1px solid gray;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 3px 3px 2px 0px gray;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+  <p>ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя ЛяЛяЛя</p>
+
+  <button data-tooltip="подсказка длиннее, чем элемент">Короткая кнопка</button>
+  <button data-tooltip="HTML<br>подсказка">Ещё кнопка</button>
+
+  <p>Прокрутите страницу, чтобы ссылки были вверху и проверьте, правильно ли показываются подсказки.</p>
+
+
+  <script>
+    // ваш код
+    function showTooltip(event) {
+      
+      if (!event.target.hasAttribute('data-tooltip')) return;
+      
+      var div = document.createElement('div');
+      div.className = 'tooltip';
+      div.innerHTML = event.target.getAttribute('data-tooltip');
+      document.body.appendChild(div);
+      
+      var box = event.target.getBoundingClientRect();
+      
+      var compLeft = box.left + event.target.offsetWidth / 2 - div.offsetWidth / 2;
+      if (compLeft < 0) compLeft = 0;
+      div.style.left = compLeft + 'px';
+      
+      var compTop = box.top - div.offsetHeight - 5;
+      if (compTop < 0) compTop = 0;
+      if (compTop > box.top - div.offsetHeight) compTop = box.bottom + 5 + window.pageYOffset;
+      div.style.top = compTop + 'px';
+    }
+    
+    function hideTooltip(event) {
+      if (!event.target.hasAttribute('data-tooltip')) return;
+      document.body.removeChild(document.body.lastElementChild);
+    }
+    
+    document.addEventListener('mouseover', showTooltip);
+    document.addEventListener('mouseout', hideTooltip);
+  </script>
+
+</body>
+
+</html>
