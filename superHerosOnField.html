@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="soccer.css">
+</head>
+
+<body>
+
+  <h2>Расставьте супергероев по полю.</h2>
+
+  <p>Супергерои и мяч -- это элементы с классом "draggable". Сделайте так, чтобы их можно было переносить.</p>
+
+  <p>Важно: если супергероя подносят к низу или верху страницы, она должна автоматически прокручиваться. Если страница помещается на вашем экране целиком и не имеет вертикальной прокрутки -- сделайте окно браузера меньше, чтобы протестировать эту возможность.</p>
+
+  <p>Да, и ещё: супергерои ни при каких условиях не должны попасть за край экрана.</p>
+
+  <div id="field">
+
+  </div>
+
+  <div class="hero draggable" id="hero1"></div>
+  <div class="hero draggable" id="hero2"></div>
+  <div class="hero draggable" id="hero3"></div>
+  <div class="hero draggable" id="hero4"></div>
+  <div class="hero draggable" id="hero5"></div>
+  <div class="hero draggable" id="hero6"></div>
+
+  <img src="https://js.cx/drag-heroes/ball.png" class="draggable">
+
+  <div style="clear:both"></div>
+
+  <script>
+    function getCoords(elem) {
+      var coords = elem.getBoundingClientRect();
+      return {
+        top: coords.top + pageYOffset,
+        left: coords.left + pageXOffset
+      };
+    };
+    
+    document.onmousedown = function(e) {
+      if (!e.target.classList.contains('draggable')) return;
+      var targetCoords = getCoords(e.target);
+      var shiftX = e.pageX - targetCoords.left;
+      var shiftY = e.pageY - targetCoords.top;
+      var width = e.target.offsetWidth;
+      var height = e.target.offsetHeight;
+      e.target.style.position = 'absolute';
+      e.target.style.top = targetCoords.top + 'px';
+      e.target.style.left = targetCoords.left + 'px';
+      e.target.zIndex = 1000;
+      
+      document.onmousemove = function(e) {
+        var newLeft = e.pageX - shiftX;
+        var docCoords = document.documentElement.getBoundingClientRect();
+        if (newLeft < 0) newLeft = 0;
+        if (newLeft > pageXOffset + document.body.offsetWidth - width) newLeft = pageXOffset + document.body.offsetWidth - width;
+        if (newLeft <= pageXOffset) window.scrollBy(-10, 0);
+        if (newLeft >= pageXOffset + docCoords.right - e.target.offsetWidth) window.scrollBy(10, 0);
+        var newTop = e.pageY - shiftY;
+        if (newTop < 0) newTop = 0;
+        if (newTop > pageYOffset + document.body.offsetHeight - height) newTop = pageYOffset + document.body.offsetHeight - height;
+        if (newTop <= pageYOffset) window.scrollBy(0, -10);
+        if (newTop >= pageYOffset + docCoords.bottom - e.target.offsetHeight) window.scrollBy(0, 10);
+        e.target.style.top = newTop + 'px';
+        e.target.style.left = newLeft + 'px';
+      } 
+      
+      document.onmouseup = function() {
+        document.onmousemove = document.onmouseup = null;
+      };
+      
+      return false;
+    }
+
+  </script>
+</body>
+
+</html>
