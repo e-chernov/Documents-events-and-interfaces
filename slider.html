@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div id="slider" class="slider">
+    <div class="thumb"></div>
+  </div>
+
+  <script>
+    // ...Ваш код..
+    function getCoords(elem) {
+      var coords = elem.getBoundingClientRect();
+      return {
+        top: coords.top + pageYOffset,
+        left: coords.left + pageXOffset
+      };
+    }
+    
+    var slider = document.querySelector('.slider');
+    var thumb = document.querySelector('.thumb');
+    
+    thumb.onmousedown = function(e) {
+      
+      var sliderCoords = getCoords(slider);
+      var thumbCoords = getCoords(thumb);
+      var shiftX = e.pageX - thumbCoords.left;
+      
+      document.onmousemove = function(e) {
+        var newLeft = e.pageX - shiftX - sliderCoords.left;
+        if (newLeft < 0) newLeft = 0;
+        var rightEdge = slider.offsetWidth - thumb.offsetWidth;
+        if (newLeft > rightEdge) newLeft = rightEdge;
+        thumb.style.left = newLeft + 'px';
+      };
+      
+      document.onmouseup = function() {
+        document.onmousemove = document.onmouseup = null;
+      };
+
+      return false; 
+    };
+  </script>
+
+</body>
+
+</html>
