@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <script>
+    /* ваш код */
+    function addScripts(scripts, callback) {
+      var elems = [];
+      var counter = 0;
+      for (var i = 0; i < scripts.length; i++) {
+        elems[i] = document.createElement('script');
+        elems[i].src = scripts[i];
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(elems[i], s);
+        elems[i].onload = function() {
+          counter += 1;
+          if (counter == scripts.length) callback();
+        }
+      }
+    }
+
+    // функция a() сработает только если загружены a.js, b.js, c.js
+    addScripts(["a.js", "b.js", "c.js"], function() {
+      a()
+    });
+  </script>
+
+</body>
+
+</html>
