@@ -17,25 +17,36 @@
 
     // вспомогательная функция, если понадобится
 
-    function getChar(event) {
-      if (event.which == null) {
-        if (event.keyCode < 32) return null;
-        return String.fromCharCode(event.keyCode) // IE
+    function runOnKeys(func, code1, code2) {
+      var pressed = {};
+      
+      document.onkeydown = function(e) {
+        
+        if (e.keyCode == code1) pressed.q = true;
+        if (e.keyCode == code2) pressed.w = true;
+        if (!pressed.q || !pressed.w) return;
+        func();
+        pressed = {}; 
       }
-
-      if (event.which != 0 && event.charCode != 0) {
-        if (event.which < 32) return null;
-        return String.fromCharCode(event.which) // остальные
+      
+      document.onkeyup = function(e) {
+        if (e.keyCode == code1) delete pressed.q;
+        if (e.keyCode == code2) delete pressed.w;
       }
-
-      return null; // специальная клавиша
+      
+       
+      /*for (var i = 0; i < arguments.length; i++) {
+        
+      }*/
     }
     
-    var input = document.body.firstElementChild;
-    
-    input.onkeypress = function(e) {
-      if (e.which < 48 || e.which > 57) return false;
-    }
+    runOnKeys(
+      function() {
+        alert("Привет!")
+      },
+      "Q".charCodeAt(0),
+      "W".charCodeAt(0)
+    );
   </script>
 </body>
 
