@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    /* стиль для input с плейсхолдером */
+
+    .placeholder {
+      color: blue;
+      font-family: Georgia;
+    }
+    /* стиль для подсказки над элементом (вместо плейсхолдера при фокусировке) */
+
+    .placeholder-tooltip {
+      color: blue;
+      font-family: Georgia;
+      position: fixed;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>Красивый placeholder:</p>
+
+  <input type="email" data-placeholder="E-mail">
+
+
+  <script>
+    var input = document.querySelector('[data-placeholder]');
+
+    showPlaceholder(input);
+
+    // Показать placeholder внутри input
+    // Также можно сделать это при помощи вёрстки, отдельным элементом
+    function showPlaceholder(input) {
+      input.classList.add('placeholder');
+      input.value = input.dataset.placeholder;
+    }
+
+    // ...ваш код для input...
+    input.onfocus = function() {
+      var tooltip = document.createElement('div');
+      var coords = input.getBoundingClientRect();
+      tooltip.innerHTML = input.value;
+      tooltip.classList.add('placeholder-tooltip');
+      tooltip.style.left = coords.left + 'px';
+      tooltip.style.top = coords.top - input.offsetHeight / 1.25 + 'px';
+      input.parentNode.insertBefore(tooltip, input);
+      input.value = '';
+    }
+    
+    input.onblur = function() {
+      input.parentNode.removeChild(input.parentNode.children[1]);
+      showPlaceholder(input);
+    }
+  </script>
+
+
+</body>
+
+</html>
