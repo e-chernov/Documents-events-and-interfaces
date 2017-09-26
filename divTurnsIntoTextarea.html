@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <link type="text/css" rel="stylesheet" href="my.css">
+</head>
+
+<body>
+
+  <ul>
+    <li>Ctrl-E to start editing.</li>
+    <li>While editing: Ctrl-S to save, Esc to cancel.</li>
+  </ul>
+
+
+  <textarea id="area"></textarea>
+  <div id="view">Text</div>
+
+  <script>
+    document.onkeydown = function(e) {
+      if (e.which == 69 && e.ctrlKey) {
+        view.style.display = 'none';
+        area.value = view.innerHTML;
+        area.style.display = 'initial';
+        return false;
+      }
+      if (e.which == 83 && e.ctrlKey) {
+        if (area.style.display == 'none') return;
+        area.style.display = 'none';
+        view.innerHTML = area.value;
+        view.style.display = 'block';
+        return false;
+      }
+      if (e.which == 27) {
+        if (area.style.display == 'none') return;
+        area.style.display = 'none';
+        view.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+
+</html>
