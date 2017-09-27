@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+
+  Введите текст(например, пароль) с нажатым CapsLock:
+  <input type="text" />
+
+  <div style="display:none;color:red" id="capsIndicator">Внимание: нажат CapsLock!</div>
+
+  <script>
+
+    var input = document.body.firstElementChild;
+    var capsOn;
+    var showing;
+    var pressCounter = 0;
+    
+    document.onkeydown = checkCaps;
+    
+    input.onfocus = function() {
+      if (capsOn) showIndicator();
+    }
+    
+    input.onblur = hideIndicator;
+    
+    function checkCaps(e) {
+      if (e.which == 20 && showing) {
+        capsOn = false;
+        hideIndicator();
+        return;
+      }
+      if (e.which == 20) {
+        capsOn = true;
+        if (e.target == input) showIndicator();
+      }
+    }
+    
+    function showIndicator() {
+      capsIndicator.style.display = 'block';
+      showing = true;
+    }
+    
+    function hideIndicator() {
+      capsIndicator.style.display = 'none';
+      showing = false;
+    }
+  </script>
+
+</body>
+
+</html>
