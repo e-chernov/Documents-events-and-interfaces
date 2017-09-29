@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #prompt-form {
+      display: none;
+      padding: 5px 5px 5px 70px;
+      width: 200px;
+      border: 1px solid black;
+      background: white url(https://js.cx/clipart/prompt.png) no-repeat left 5px;
+      vertical-align: middle;
+    }
+
+    #prompt-form-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 9999;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    #prompt-form-container:before {
+      display: inline-block;
+      height: 100%;
+      content: '';
+      vertical-align: middle;
+    }
+
+    #prompt-form input[name="text"] {
+      display: block;
+      margin: 5px;
+      width: 180px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Нажмите на кнопку ниже</h1>
+  <button>Press me</button>
+
+  <div id="prompt-form-container">
+    <form id="prompt-form">
+      <div id="prompt-message">Введите, пожалуйста...
+        <br>Что-то..</div>
+      <input name="text" type="text">
+      <input type="submit" name="ok" value="Ок">
+      <input type="button" name="cancel" value="Отмена">
+      <input style="opacity:0">
+    </form>
+  </div>
+  
+  <script>
+    var startButton = document.body.children[1];
+    startButton.focus();
+    var form = document.getElementById('prompt-form');
+    var messageElem = form.firstElementChild;
+    var input = form.elements.text;
+    var okButton = form.elements.ok;
+    var cancelButton = form.elements.cancel;
+    
+    function showPrompt(text, callback) {
+      messageElem.innerHTML = text;
+      form.style.display = 'inline-block';
+      input.focus();
+      document.body.style.backgroundColor = 'whitesmoke';
+      form.onsubmit = function() {
+        callback();
+        document.body.style.backgroundColor = 'white';
+      }
+      document.onkeydown = function(e) {
+        if (e.which != 27) return;
+        form.style.display = 'none';
+        callback(null);
+        document.body.style.backgroundColor = 'white';
+      }
+      cancelButton.onclick = function() {
+         form.style.display = 'none';
+        callback(null);
+        document.body.style.backgroundColor = 'white';
+      }
+    };
+    
+    function checkFocus(e) {
+      if (e.target != input && e.target !=okButton && e.target != cancelButton) {
+        if (form.offsetWidth) input.focus();
+      }
+    }
+    
+    document.addEventListener('focusin', checkFocus);   
+    
+    
+    startButton.onclick = function() { showPrompt('text', function() { alert(input.value) }); }
+  </script>
+
+
+</body>
+
+</html>
