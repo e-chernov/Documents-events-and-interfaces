@@ -1,0 +1,30 @@
+function CustomSelect(options) {
+  var elem = options.elem;
+  var openSelect = new CustomEvent('openselect', {
+    bubbles: true,
+    detail: function(e) {return e.target}
+  });
+  
+  elem.onclick = function(e) {
+    if (!elem.classList.contains('open') && e.target == elem.children[0]) {
+      elem.classList.add('open');
+      var selects = document.querySelectorAll('.customselect');
+      for (var i = 0; i < selects.length; i++) {
+        if (selects[i] != elem) selects[i].classList.remove('open');
+      }
+    }
+    else elem.classList.remove('open');
+    
+    if (e.target.tagName == 'LI') {
+      var selectEvent = new CustomEvent('select', {
+        bubbles: true,
+        detail: e.target.getAttribute('data-value')
+      });
+      elem.dispatchEvent(selectEvent);
+      elem.children[0].innerHTML = e.target.innerHTML;
+    }
+  }
+  
+  
+  
+}
