@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.polyfill.io/v1/polyfill.js?features=Element.prototype.closest"></script>
+  <style>
+    .voter {
+      font-family: Consolas, "Lucida Console", monospace;
+      font-size: 18px;
+    }
+
+    .up,
+    .down {
+      cursor: pointer;
+      color: blue;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="voter" class="voter">
+    <span class="down">—</span>
+    <span class="vote">0</span>
+    <span class="up">+</span>
+  </div>
+  
+  <div id="another-voter" class="voter">
+    <span class="down">—</span>
+    <span class="vote">0</span>
+    <span class="up">+</span>
+  </div>
+
+  <script>
+    function Voter(options) {
+      // ... ваш код
+      var div = options.elem;
+      
+      div.children[0].onclick = function() {
+        setVote(+div.children[1].innerHTML - 1);
+      }
+      
+      div.children[2].onclick = function() {
+        setVote(+div.children[1].innerHTML + 1);
+      }
+      
+      div.onselectstart = function() {
+        return false;
+      }
+      
+      function setVote(number) {
+        if (number < 0) return;
+        div.children[1].innerHTML = number;
+      }
+      
+      this.setVote = setVote;
+    }
+
+    var voter = new Voter({
+      elem: document.getElementById('voter')
+    });
+
+    voter.setVote(22);
+    
+    var anotherVoter = new Voter({
+      elem: document.getElementById('another-voter')
+    });
+    
+    anotherVoter.setVote(333);
+  </script>
+
+</body>
+
+</html>
